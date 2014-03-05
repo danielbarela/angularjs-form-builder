@@ -1,6 +1,10 @@
 'use strict';
 
-angularApp.service('FormService', function FormService($http) {
+//angular.module('angularjsFormBuilderApp').service('FormService', function FormService($http) {
+
+angular.module('angularjsFormBuilderApp')
+  .factory('FormService', ['$http', 
+    function ($http) {
 
     var formsJsonPath = './static-data/sample_forms.json';
 
@@ -48,7 +52,7 @@ angularApp.service('FormService', function FormService($http) {
             return $http.get(formsJsonPath).then(function (response) {
                 var requestedForm = {};
                 angular.forEach(response.data, function (form) {
-                    if (form.form_id == id) requestedForm = form;
+                    if (form.id == id) requestedForm = form;
                 });
                 return requestedForm;
             });
@@ -59,4 +63,4 @@ angularApp.service('FormService', function FormService($http) {
             });
         }
     };
-});
+}]);
